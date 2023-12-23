@@ -19,13 +19,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: List Contents of build Directory
-        run: ls -R build/
-
-      - name: Debug Environment Variables
-        run: env
-
-
 
   deploy:
     runs-on: ubuntu-latest
@@ -42,6 +35,9 @@ jobs:
 
       - name: Print Working Directory Path
         run: pwd
+
+      - name: List Contents current Directory
+        run: ls
 
       - name: List Contents of build Directory
         run: ls -R build/
