@@ -33,11 +33,23 @@ jobs:
             echo "Error: Build directory not found."
             exit 1
           fi
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifact
+          path: build
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
+
     steps:
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build-artifact
+          path: build
+
       - name: Print Working Directory Path
         run: pwd
 
