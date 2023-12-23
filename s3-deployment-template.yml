@@ -1,4 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Include
 Resources:
   MyS3Bucket:
     Type: AWS::S3::Bucket
@@ -8,17 +9,11 @@ Resources:
         IndexDocument: index.html
         ErrorDocument: error.html
 
+  MyS3BucketPolicy: !Transform
+    Name: 'AWS::Include'
+    Parameters:
+      Location: 's3-bucket-policy.json'
+
 Outputs:
   S3BucketName:
     Value: !Ref MyS3Bucket
-
-MyS3BucketPolicy:
-  Type: "AWS::S3::BucketPolicy"
-  Properties:
-    Bucket: !Ref MyS3Bucket
-    PolicyDocument:
-      Statement:
-        - Action: s3:GetObject
-          Effect: Allow
-          Resource: !Sub arn:aws:s3:::${MyS3Bucket}/*
-          Principal: "*"
