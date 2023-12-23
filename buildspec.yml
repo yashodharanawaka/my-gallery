@@ -16,14 +16,4 @@ phases:
 
 post_build:
   commands:
-    # Deploy CloudFormation stack to create S3 bucket
-    - aws cloudformation deploy --template-file s3-deployment-template.yml --stack-name my-s3-bucket-stack --region ap-northeast-1
-
-    # Get the S3 bucket name from CloudFormation stack outputs
-    - export S3_BUCKET_NAME=$(aws cloudformation describe-stacks --stack-name my-s3-bucket-stack --query 'Stacks[0].Outputs[0].OutputValue' --output text)
-
-    # Sync build artifacts to S3 bucket
-    - aws s3 sync build/ s3://$S3_BUCKET_NAME --delete
-
-    # Output S3 bucket name for reference
-    - echo "S3_BUCKET_NAME=$S3_BUCKET_NAME" >> $CODEBUILD_ENV_FILE
+      - aws cloudformation deploy --template-file s3-bucket-template.yaml --stack-name MyS3BucketStack --capabilities CAPABILITY_NAMED_IAM
