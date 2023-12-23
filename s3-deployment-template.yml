@@ -4,7 +4,6 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: mygallerypicsbucket2
-      AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html
@@ -12,3 +11,14 @@ Resources:
 Outputs:
   S3BucketName:
     Value: !Ref MyS3Bucket
+
+MyS3BucketPolicy:
+  Type: "AWS::S3::BucketPolicy"
+  Properties:
+    Bucket: !Ref MyS3Bucket
+    PolicyDocument:
+      Statement:
+        - Action: s3:GetObject
+          Effect: Allow
+          Resource: !Sub arn:aws:s3:::${MyS3Bucket}/*
+          Principal: "*"
