@@ -8,15 +8,6 @@ Resources:
         IndexDocument: index.html
         ErrorDocument: error.html
 
-  MyS3BucketPolicy:
-    Type: "AWS::S3::BucketPolicy"
-    Properties:
-      Bucket: !Ref MyS3Bucket
-      PolicyDocument: !Transform
-        Name: 'AWS::Include'
-        Parameters:
-          Location: 's3-bucket-policy.json'
-
 Outputs:
   S3BucketName:
     Value: !Ref MyS3Bucket
