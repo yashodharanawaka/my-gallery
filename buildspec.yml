@@ -8,11 +8,11 @@ phases:
 
   install:
     commands:
-      - npm install
+      - node --max-old-space-size=4096 $(which npm) install
 
   build:
     commands:
-      - npm run build
+      - node --max-old-space-size=4096 $(which npm) run build
 
 artifacts:
   files:
