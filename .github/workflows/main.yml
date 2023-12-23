@@ -41,6 +41,10 @@ jobs:
       - name: Print Working Directory Path
         run: pwd
 
+      - name: List Contents of GitHub Workspace
+        run: ls -R $GITHUB_WORKSPACE
+
+
       - name: Print GitHub Workspace Path
         run: |
           echo "GitHub Workspace: $GITHUB_WORKSPACE"
