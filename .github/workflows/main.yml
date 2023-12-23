@@ -37,7 +37,7 @@ jobs:
           aws-region: ap-northeast-1
 
       - name: Sync to S3 Bucket
-        run: aws s3 sync build/ s3://mygallerypicsbucket --delete
+        run: aws s3 sync build s3://mygallerypicsbucket --delete
 
       - name: Debug AWS CLI Commands
         run: |
