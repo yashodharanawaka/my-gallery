@@ -42,7 +42,8 @@ jobs:
         run: pwd
 
       - name: Print GitHub Workspace Path
-        run: echo "GitHub Workspace: $GITHUB_WORKSPACE"
+        run: |
+          echo "GitHub Workspace: $GITHUB_WORKSPACE"
 
       - name: Verify Build Directory
         run: |
