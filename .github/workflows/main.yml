@@ -50,11 +50,11 @@ jobs:
           bucket_exists=$(aws s3api head-bucket --bucket $bucket_name 2>&1 || true)
           if [[ $bucket_exists == *"Not Found"* ]]; then
             aws s3api create-bucket --bucket $bucket_name --region $region --create-bucket-configuration LocationConstraint=$region
+          else
+            echo "Bucket $bucket_name already exists. Modifying access level..."
             aws s3api put-bucket-policy --bucket $bucket_name --policy file://bucket-policy.json
             aws s3api put-bucket-acl --bucket $bucket_name --acl public-read
             aws s3 website s3://$bucket_name --index-document index.html --error-document error.html
-          else
-            echo "Bucket $bucket_name already exists."
           fi
 
       - name: Sync to S3 Bucket
