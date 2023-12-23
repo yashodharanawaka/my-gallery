@@ -25,6 +25,15 @@ jobs:
       - name: List Contents current Directory
         run: ls
 
+      - name: Verify Build Directory
+        run: |
+          if [ -d "build" ]; then
+            echo "Build directory exists."
+          else
+            echo "Error: Build directory not found."
+            exit 1
+          fi
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
