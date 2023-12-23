@@ -19,22 +19,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Print Working Directory Path
-        run: pwd
-
-      - name: List Contents current Directory
-        run: ls
-
-      - name: Verify Build Directory
-        run: |
-          if [ -d "build" ]; then
-            echo "Build directory exists."
-          else
-            echo "Error: Build directory not found."
-            exit 1
-          fi
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: build-artifact
           path: build
@@ -45,33 +31,10 @@ jobs:
 
     steps:
       - name: Download Build Artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: build-artifact
           path: build
-
-      - name: Print Working Directory Path
-        run: pwd
-
-      - name: List Contents of GitHub Workspace
-        run: ls -R $GITHUB_WORKSPACE
-
-
-      - name: Print GitHub Workspace Path
-        run: |
-          echo "GitHub Workspace: $GITHUB_WORKSPACE"
-
-      - name: Verify Build Directory
-        run: |
-          if [ -d "build" ]; then
-            echo "Build directory exists."
-          else
-            echo "Error: Build directory not found."
-            exit 1
-          fi
-
-      - name: List Contents of build Directory
-        run: ls -R build/
 
       - name: Deploy to AWS S3
         uses: aws-actions/configure-aws-credentials@v4
@@ -79,20 +42,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-1
-
-      - name: Print Working Directory Path
-        run: pwd
-
-      - name: Debug Environment Variables
-        run: env
-
-      - name: List Contents current Directory
-        run: ls
-
-      - name: Install AWS CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y awscli
 
       - name: Sync to S3 Bucket
         run: aws s3 sync $GITHUB_WORKSPACE/build/ s3://mygallerypicsbucket --delete
