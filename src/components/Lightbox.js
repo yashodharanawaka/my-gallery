@@ -9,7 +9,7 @@ const Lightbox = () => {
 
     useEffect(() => {
         setPhoto({
-            url: `photos/${context.keys().find((path, index) => index === id - 1).substring(1)}`,
+            url: `/photos${context.keys().find((path, index) => index === id - 1).substring(1)}`,
             alt_description: `Photo ${id}`,
         })
     }, [id]);
