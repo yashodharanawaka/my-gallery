@@ -43,5 +43,10 @@ jobs:
       - name: Print Working Directory Path
         run: pwd
 
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+
       - name: Sync to S3 Bucket
-        run: aws s3 sync build/ s3://mygallerypicsbucket --delete
+        run: aws s3 sync $GITHUB_WORKSPACE/build/ s3://mygallerypicsbucket --delete
