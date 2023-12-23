@@ -42,11 +42,19 @@ jobs:
         run: pwd
 
       - name: Print GitHub Workspace Path
-        run: |
-          echo "GitHub Workspace: $GITHUB_WORKSPACE"
+        run: echo "GitHub Workspace: $GITHUB_WORKSPACE"
 
-      - name: Set Working Directory
-        run: cd $GITHUB_WORKSPACE
+      - name: Verify Build Directory
+        run: |
+          if [ -d "build" ]; then
+            echo "Build directory exists."
+          else
+            echo "Error: Build directory not found."
+            exit 1
+          fi
+
+      - name: List Contents of build Directory
+        run: ls -R build/
 
       - name: Deploy to AWS S3
         uses: aws-actions/configure-aws-credentials@v4
@@ -64,9 +72,6 @@ jobs:
       - name: List Contents current Directory
         run: ls
 
-      - name: List Contents of build Directory
-        run: ls -R build/
-
       - name: Install AWS CLI
         run: |
           sudo apt-get update
@@ -74,3 +79,4 @@ jobs:
 
       - name: Sync to S3 Bucket
         run: aws s3 sync $GITHUB_WORKSPACE/build/ s3://mygallerypicsbucket --delete
+
