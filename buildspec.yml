@@ -3,16 +3,17 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - export NODE_OPTIONS="--max-old-space-size=4096"
       - node -v
       - npm -v
 
   install:
     commands:
-      - node --max-old-space-size=4096 $(which npm) install
+      - npm install
 
   build:
     commands:
-      - node --max-old-space-size=4096 $(which npm) run build
+      - npm run build
 
 artifacts:
   files:
