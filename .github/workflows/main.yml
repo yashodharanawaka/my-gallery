@@ -43,6 +43,12 @@ jobs:
       - name: Print Working Directory Path
         run: pwd
 
+      - name: List Contents of build Directory
+        run: ls -R build/
+
+      - name: Debug Environment Variables
+        run: env
+
       - name: Install AWS CLI
         run: |
           sudo apt-get update
