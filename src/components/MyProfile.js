@@ -5,12 +5,12 @@ const MyProfile = () => {
         <div className="contact-container">
             <div className="contact-details">
                 <h2>Contact Information</h2>
-                <p>Email: your-email@example.com</p>
-                <p>Phone: +1 (123) 456-7890</p>
-                <p>Address: 123 Street, City, Country</p>
+                <p>Email: myself@somehwere.com</p>
+                <p>Phone: +94 00-000-0000</p>
+                <p>Address: 1/44,Udara Mw., Colombo 01, Sri Lanka</p>
             </div>
             <div className="contact-picture">
-                <img src={process.env.PUBLIC_URL + '/your-picture.jpg'} alt="Your Name" />
+                <img src='profile_pic.jpg' alt="Profile Pic" />
             </div>
         </div>
     );
