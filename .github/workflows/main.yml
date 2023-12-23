@@ -36,6 +36,13 @@ jobs:
           name: build-artifact
           path: build
 
+      - name: Create S3 bucket
+        run:  aws s3api create-bucket --bucket mygallerypicsbucket1 --region ap-northeast-1
+
+      - name: Configure S3 bucket for static website hosting
+        run:  aws s3 website s3://mygallerypicsbucket1 --index-document index.html --error-document error.html
+
+
       - name: Deploy to AWS S3
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -44,5 +51,5 @@ jobs:
           aws-region: ap-northeast-1
 
       - name: Sync to S3 Bucket
-        run: aws s3 sync $GITHUB_WORKSPACE/build/ s3://mygallerypicsbucket --delete
+        run: aws s3 sync $GITHUB_WORKSPACE/build/ s3://mygallerypicsbucket1 --delete
 
