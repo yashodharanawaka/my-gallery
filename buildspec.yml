@@ -19,5 +19,3 @@ phases:
       - pwd
       - ls
       - aws cloudformation deploy --template-file s3-deployment-template.yml --stack-name MyS3BucketStack --capabilities CAPABILITY_NAMED_IAM
-      - aws cloudformation describe-stack-resources --stack-name MyS3BucketStack > stack-resources-output.txt
-      - cat stack-resources-output.txt
