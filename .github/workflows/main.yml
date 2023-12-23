@@ -27,12 +27,17 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-
     needs: build
-
     steps:
       - name: Print Working Directory Path
         run: pwd
+
+      - name: Print GitHub Workspace Path
+        run: |
+          echo "GitHub Workspace: $GITHUB_WORKSPACE"
+
+      - name: Set Working Directory
+        run: cd $GITHUB_WORKSPACE
 
       - name: Deploy to AWS S3
         uses: aws-actions/configure-aws-credentials@v4
