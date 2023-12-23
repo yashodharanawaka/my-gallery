@@ -48,4 +48,4 @@ jobs:
 
       - name: Debug AWS CLI Commands
         run: |
-          echo "AWS CLI Command: aws s3 sync build/ s3://mygallerypicsbucket"
+          echo "AWS CLI Command: aws s3 sync ./build s3://mygallerypicsbucket"
