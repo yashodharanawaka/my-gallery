@@ -14,6 +14,15 @@ phases:
     commands:
       - npm run build
 
+  post_build:
+    commands:
+      - |
+        if [ $CODEBUILD_BUILD_SUCCEEDING -eq 0 ]; then
+          echo "Build failed!"
+        else
+          echo "Build completed successfully"
+        fi
+
 artifacts:
   files:
     - 'build/**/*'
