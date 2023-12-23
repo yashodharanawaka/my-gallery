@@ -19,6 +19,8 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Print Working Directory Path
+        run: pwd
 
   deploy:
     runs-on: ubuntu-latest
@@ -36,14 +38,14 @@ jobs:
       - name: Print Working Directory Path
         run: pwd
 
+      - name: Debug Environment Variables
+        run: env
+
       - name: List Contents current Directory
         run: ls
 
       - name: List Contents of build Directory
         run: ls -R build/
-
-      - name: Debug Environment Variables
-        run: env
 
       - name: Install AWS CLI
         run: |
