@@ -19,8 +19,15 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: List Contents of Working Directory
+        run: ls -R
+
       - name: List Contents of build Directory
         run: ls -R build/
+
+      - name: Debug Environment Variables
+        run: env
+
 
 
   deploy:
