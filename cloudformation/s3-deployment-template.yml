@@ -1,0 +1,13 @@
+Resources:
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: mygallerypicsbucket2
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+
+Outputs:
+  S3BucketName:
+    Value: !Ref MyS3Bucket
