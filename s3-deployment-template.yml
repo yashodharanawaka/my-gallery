@@ -3,7 +3,7 @@ Resources:
   MyS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: mygallerypicsbucket2
+      BucketName: mygallerypicsbucket1
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html
