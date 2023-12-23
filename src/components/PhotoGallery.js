@@ -10,7 +10,7 @@ const PhotoGallery = () => {
         const localPhotos = context.keys().map((imagePath, index) => {
             return {
                 id: index + 1,
-                url: `/photos/${imagePath.substring(1)}`,
+                url: `photos/${imagePath.substring(1)}`,
                 alt_description: `Photo ${index + 1}`,
             };
         });

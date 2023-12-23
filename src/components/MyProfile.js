@@ -1,6 +1,7 @@
 import React from 'react';
 
 const MyProfile = () => {
+    console.log('Rendering MyProfile component');
     return (
         <div className="contact-container">
             <div className="contact-details">
