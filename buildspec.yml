@@ -16,4 +16,6 @@ phases:
 
   post_build:
     commands:
-        - aws cloudformation deploy --template-file s3-bucket-template.yaml --stack-name MyS3BucketStack --capabilities CAPABILITY_NAMED_IAM
+      - pwd
+      - ls
+      - aws cloudformation deploy --template-file s3-bucket-template.yaml --stack-name MyS3BucketStack --capabilities CAPABILITY_NAMED_IAM
