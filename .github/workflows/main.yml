@@ -44,8 +44,4 @@ jobs:
           aws-region: ap-northeast-1
 
       - name: Sync to S3 Bucket
-        run: aws s3 sync ./build s3://mygallerypicsbucket --delete
-
-      - name: Debug AWS CLI Commands
-        run: |
-          echo "AWS CLI Command: aws s3 sync ./build s3://mygallerypicsbucket"
+        run: aws s3 sync build/ s3://mygallerypicsbucket --delete
