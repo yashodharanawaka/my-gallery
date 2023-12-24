@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -40,10 +40,11 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Get the working directory
         run: pwd
+
       - name: Get the latest commit hash
         run: |
           COMMIT_HASH=$(git rev-parse HEAD)
@@ -51,17 +52,15 @@ jobs:
 
       - name: Tag the build
         run: |
-          COMMIT_HASH=$(echo ${{ needs.build.outputs.commit_hash }})
           echo "Tagging commit $COMMIT_HASH"
           curl -X POST \
                -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
                -H "Accept: application/vnd.github.v3+json" \
                "https://api.github.com/repos/${{ github.repository }}/git/refs" \
                -d '{
-               "ref": "refs/tags/build-${{ github.run_number }}",
+               "ref": "refs/tags/build-${{ github.run_number }}-${GITHUB_SHA:0:7}",  # Extend tag name
                "sha": "'"$COMMIT_HASH"'"
                }'
-          git push origin build-${{ github.run_number }}
 
   deploy:
     runs-on: ubuntu-latest
