@@ -24,33 +24,14 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Get current commit hash
-        id: get_commit
-        run: echo "::set-output name=commit_hash::$(git rev-parse --short HEAD)"
-
-      - name: Create version tag
-        id: create_tag
-        run: |
-          echo "::set-output name=tag::v1.0.0-${{ steps.get_commit.outputs.commit_hash }}"
-
-      - name: Push tag to repository
-        if: success()
-        run: git tag ${{ steps.create_tag.outputs.tag }} && git push origin refs/tags/${{ steps.create_tag.outputs.tag }} -u ${{ secrets.GH_TOKEN }}
-
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifact
-          path: build
-
-      - name: Create Release
-        uses: actions/create-release@v1
-        env: GITHUB_TOKEN:${{secrets.GH_TOKEN}}
-        with:
-          tag_name: build-${{github.run_number }}
-          release_name: Build ${{ github.run_number }}
-          draft: false
-          prerelease: false
+#      - name: Create Release
+#        uses: actions/create-release@v1
+#        env: GITHUB_TOKEN:${{secrets.GH_TOKEN}}
+#        with:
+#          tag_name: build-${{github.run_number }}
+#          release_name: Build ${{ github.run_number }}
+#          draft: false
+#          prerelease: false
 
   deploy:
     runs-on: ubuntu-latest
