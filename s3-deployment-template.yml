@@ -8,7 +8,7 @@ Resources:
         IndexDocument: index.html
         ErrorDocument: error.html
     DeletionPolicy: Retain
-    UpdateReplacePolicy: Retain
+#    UpdateReplacePolicy: Retain
   BucketPolicy:
     Type: 'AWS::S3::BucketPolicy'
     Properties:
