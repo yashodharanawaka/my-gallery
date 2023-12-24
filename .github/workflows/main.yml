@@ -42,18 +42,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Get the working directory
-        run: pwd
+      - name: Generate Tag
+        run: |
+          TAG_NAME="build-$(date +%Y%m%d%H%M%S)"
+          echo "Setting TAG_NAME to $TAG_NAME"
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
 
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          TAG_NAME="build-$(date +%Y%m%d%H%M%S)"
-          echo "Setting TAG_NAME to $TAG_NAME"
-          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
         with:
           tag_name: "${{ env.TAG_NAME }}"
           release_name: Release ${{ env.TAG_NAME }}
