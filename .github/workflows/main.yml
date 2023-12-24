@@ -52,6 +52,8 @@ jobs:
 
       - name: Create Git tag
         run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
           git tag -a "build-${{ github.run_number }}-${GITHUB_SHA:0:7}" -m "Build ${{ github.run_number }}"
 
       - name: Push tags
