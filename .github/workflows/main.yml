@@ -45,19 +45,18 @@ jobs:
       - name: Get the working directory
         run: pwd
 
-      - name: Get the latest commit hash
-        run: |
-          COMMIT_HASH=$(git rev-parse HEAD)
-          echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
-
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          TAG_NAME="build-$(date +%Y%m%d%H%M%S)"
+          echo "Setting TAG_NAME to $TAG_NAME"
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
         with:
-          tag_name: "v${{ COMMIT_HASH }}"
-          release_name: Release ${{ github.ref_name }}
+          tag_name: "${{ env.TAG_NAME }}"
+          release_name: Release ${{ env.TAG_NAME }}
           body: |
             Changes in this Release
             - First Change
