@@ -50,17 +50,20 @@ jobs:
           COMMIT_HASH=$(git rev-parse HEAD)
           echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
 
-      - name: Create Git tag
+      - name: Set Git user email and name
         run: |
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
-          git tag -a "build-${{ github.run_number }}-${GITHUB_SHA:0:7}" -m "Build ${{ github.run_number }}"
+
+      - name: Create Git tag
+        run: |
+          TAG_NAME="build-${{ github.run_number }}-${GITHUB_SHA:0:7}"
+          echo "Tagging commit $COMMIT_HASH with tag $TAG_NAME"
+          git tag -a "$TAG_NAME" -m "Build ${{ github.run_number }}"
 
       - name: Push tags
         run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
-          git push origin "refs/tags/build-${{ github.run_number }}"
+          git push origin "$TAG_NAME"
 
 
 
