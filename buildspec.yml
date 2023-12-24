@@ -19,4 +19,6 @@ phases:
       - pwd
       - ls
       - aws iam list-roles
+      - aws iam get-role --role-name my-gallery-pipeline-admin
+      - aws iam list-attached-role-policies --role-name my-gallery-pipeline-admin
       - aws cloudformation deploy --template-file s3-deployment-template.yml --stack-name MyGalleryS3BucketStack --capabilities CAPABILITY_NAMED_IAM --debug || exit 2
