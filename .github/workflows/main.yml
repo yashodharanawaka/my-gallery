@@ -62,8 +62,8 @@ jobs:
           git push https://${{ secrets.GH_TOKEN }}@github.com/your-username/your-repository --push origin --tags
       - name: Push tags
         run: |
-          repo_owner_name="${{ github.repository_owner }}"
-          repo_name="${{ github.repository }}"
+          echo ${{ github.repository_owner }}
+          echo ${{ github.repository }}
           git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository_owner }}/${{ github.repository }} --push origin --tags
 
 
