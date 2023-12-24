@@ -63,7 +63,7 @@ jobs:
 
       - name: Push tags
         run: |
-          git push origin "{{$TAG_NAME}}"
+          git push origin "{$TAG_NAME}"
 
   deploy:
     runs-on: ubuntu-latest
