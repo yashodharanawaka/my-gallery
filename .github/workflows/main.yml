@@ -56,6 +56,8 @@ jobs:
 
       - name: Push tags
         run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
           git push origin "refs/tags/build-${{ github.run_number }}"
 
 
