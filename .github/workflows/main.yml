@@ -35,7 +35,7 @@ jobs:
 
       - name: Push tag to repository
         if: success()
-        run: git tag ${{ steps.create_tag.outputs.tag }} && git push origin ${{ steps.create_tag.outputs.tag }} -u ${{ secrets.GH_TOKEN }}
+        run: git tag ${{ steps.create_tag.outputs.tag }} && git push origin ${{ steps.create_tag.outputs.tag }} -u ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
