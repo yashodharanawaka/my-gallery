@@ -18,4 +18,5 @@ phases:
     commands:
       - pwd
       - ls
+      - aws iam list-roles
       - aws cloudformation deploy --template-file s3-deployment-template.yml --stack-name MyGalleryS3BucketStack --capabilities CAPABILITY_NAMED_IAM --debug || exit 2
