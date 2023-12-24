@@ -45,25 +45,30 @@ jobs:
       - name: Get the working directory
         run: pwd
 
-      - name: Get the latest commit hash
-        run: |
-          COMMIT_HASH=$(git rev-parse HEAD)
-          echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
+#      - name: Get the latest commit hash
+#        run: |
+#          COMMIT_HASH=$(git rev-parse HEAD)
+#          echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
+#
+#      - name: Set Git user email and name
+#        run: |
+#          git config user.email "actions@github.com"
+#          git config user.name "GitHub Actions"
 
-      - name: Set Git user email and name
-        run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
-
-      - name: Create Git tag
-        run: |
-          TAG_NAME="build-${{ github.run_number }}-${GITHUB_SHA:0:7}"
-          echo "Tagging commit $COMMIT_HASH with tag $TAG_NAME"
-          git tag -a "$TAG_NAME" -m "Build ${{ github.run_number }}"
-
-      - name: Push tags
-        run: |
-          git push origin "refs/tags/$TAG_NAME:$TAG_NAME"
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
 
   deploy:
     runs-on: ubuntu-latest
