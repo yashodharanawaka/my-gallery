@@ -50,17 +50,13 @@ jobs:
           COMMIT_HASH=$(git rev-parse HEAD)
           echo "::set-output name=commit_hash::$COMMIT_HASH"
 
-      - name: Tag the build
+      - name: Get the commit hash from environment
+        run: | 
+          echo "Commit hash: $COMMIT_HASH"
+
+      - name: Create Git tag
         run: |
-          echo "Tagging commit $COMMIT_HASH"
-          curl -X POST \
-               -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
-               -H "Accept: application/vnd.github.v3+json" \
-               "https://api.github.com/repos/${{ github.repository }}/git/refs" \
-               -d '{
-               "ref": "refs/tags/build-${{ github.run_number }}-${GITHUB_SHA:0:7}",  # Extend tag name
-               "sha": "'"$COMMIT_HASH"'"
-               }'
+          git tag -a "build-${{ github.run_number }}-${GITHUB_SHA:0:7}" -m "Build ${{ github.run_number }}" $COMMIT_HASH
 
   deploy:
     runs-on: ubuntu-latest
