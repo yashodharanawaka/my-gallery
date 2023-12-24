@@ -61,7 +61,7 @@ jobs:
         run: |
           echo ${{ github.repository_owner }}
           echo ${{ github.repository }}
-          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository_owner }}/${{ github.repository }} --push origin --tags
+          git push https://${{ secrets.GH_TOKEN }}@github.com/yashodharanawaka/my-gallery --push origin --tags
 
 
 
