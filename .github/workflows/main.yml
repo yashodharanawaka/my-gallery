@@ -17,6 +17,9 @@ jobs:
     needs: checkout
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -44,6 +47,9 @@ jobs:
       - build
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Get the working directory
         run: pwd
       - name: Get the latest commit hash
