@@ -48,11 +48,7 @@ jobs:
       - name: Get the latest commit hash
         run: |
           COMMIT_HASH=$(git rev-parse HEAD)
-          echo "::set-output name=commit_hash::$COMMIT_HASH"
-
-      - name: Get the commit hash from environment
-        run: | 
-          echo "Commit hash: $COMMIT_HASH"
+          echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
 
       - name: Create Git tag
         run: |
@@ -60,6 +56,10 @@ jobs:
           git config --global user.name "${{ secrets.NAME }}"
           git config --global user.password "${{ secrets.GH_TOKEN }}"
           git tag -a "build-${{ github.run_number }}-${GITHUB_SHA:0:7}" -m "Build ${{ github.run_number }}" $COMMIT_HASH
+
+      - name: Push tags
+        run: git push --push origin --tags
+
 
   deploy:
     runs-on: ubuntu-latest
