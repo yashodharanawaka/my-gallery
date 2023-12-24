@@ -58,7 +58,15 @@ jobs:
           git tag -a "build-${{ github.run_number }}-${GITHUB_SHA:0:7}" -m "Build ${{ github.run_number }}" $COMMIT_HASH
 
       - name: Push tags
-        run: git push --push origin --tags
+        run: |
+          git push https://${{ secrets.GH_TOKEN }}@github.com/your-username/your-repository --push origin --tags
+      - name: Push tags
+        run: |
+          repo_owner_name="${{ github.repository_owner }}"
+          repo_name="${{ github.repository }}"
+          git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository_owner }}/${{ github.repository }} --push origin --tags
+
+
 
 
   deploy:
