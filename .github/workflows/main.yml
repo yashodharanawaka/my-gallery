@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -37,12 +37,22 @@ jobs:
 
     steps:
       - name: Get the latest commit hash
-        run: echo "::set-output name=commit_hash::$(git rev-parse HEAD)"
+        run: |
+          COMMIT_HASH=$(git rev-parse HEAD)
+          echo "::set-output name=commit_hash::$COMMIT_HASH"
 
       - name: Tag the build
         run: |
-          COMMIT_HASH=${{ needs.build.outputs.commit_hash }}
-          git tag build-${{ github.run_number }} $COMMIT_HASH
+          COMMIT_HASH=$(echo ${{ needs.build.outputs.commit_hash }})
+          echo "Tagging commit $COMMIT_HASH"
+          curl -X POST \
+               -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
+               -H "Accept: application/vnd.github.v3+json" \
+               "https://api.github.com/repos/${{ github.repository }}/git/refs" \
+               -d '{
+               "ref": "refs/tags/build-${{ github.run_number }}",
+               "sha": "'"$COMMIT_HASH"'"
+               }'
           git push origin build-${{ github.run_number }}
 
   deploy:
