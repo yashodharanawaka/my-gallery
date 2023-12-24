@@ -7,7 +7,7 @@ Resources:
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html
-    PublicAccessBlockConfiguration: []
+      PublicAccessBlockConfiguration: []
 
 Outputs:
   S3BucketName:
