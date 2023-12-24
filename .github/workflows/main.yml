@@ -43,20 +43,5 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-1
 
-#      - name: Create and Configure S3 Bucket
-#        run: |
-#          bucket_name="mygallerypicsbucket1"
-#          region="ap-northeast-1"
-#          bucket_exists=$(aws s3api head-bucket --bucket $bucket_name 2>&1 || true)
-#          if [[ $bucket_exists == *"Not Found"* ]]; then
-#            aws s3api create-bucket --bucket $bucket_name --region $region --create-bucket-configuration LocationConstraint=$region
-#          else
-#            echo "Bucket $bucket_name already exists. Modifying access level..."
-#            aws s3api put-bucket-policy --bucket $bucket_name --policy file://bucket-policy.json
-#            aws s3api put-bucket-acl --bucket $bucket_name --acl public-read
-#            aws s3 website s3://$bucket_name --index-document index.html --error-document error.html
-#          fi
-
       - name: Sync to S3 Bucket
         run: aws s3 sync $GITHUB_WORKSPACE/build/ s3://my-gallery-s3-bucket --delete
-
