@@ -56,6 +56,9 @@ jobs:
 
       - name: Create Git tag
         run: |
+          git config --global user.email "${{ secrets.EMAIL }}"
+          git config --global user.name "${{ secrets.NAME }}"
+          git config --global user.password "${{ secrets.GH_TOKEN }}"
           git tag -a "build-${{ github.run_number }}-${GITHUB_SHA:0:7}" -m "Build ${{ github.run_number }}" $COMMIT_HASH
 
   deploy:
