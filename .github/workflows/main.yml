@@ -30,14 +30,19 @@ jobs:
           name: build-artifact
           path: build
 
-#      - name: Create Release
-#        uses: actions/create-release@v1
-#        env: GITHUB_TOKEN:${{secrets.GH_TOKEN}}
-#        with:
-#          tag_name: build-${{github.run_number }}
-#          release_name: Build ${{ github.run_number }}
-#          draft: false
-#          prerelease: false
+  tag:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Create Release
+        uses: actions/create-release@v1
+        env: GITHUB_TOKEN:${{secrets.GH_TOKEN}}
+        with:
+          tag_name: build-${{github.run_number }}
+          release_name: Build ${{ github.run_number }}
+          draft: false
+          prerelease: false
 
   deploy:
     runs-on: ubuntu-latest
