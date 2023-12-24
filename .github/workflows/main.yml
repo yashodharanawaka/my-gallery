@@ -59,6 +59,10 @@ jobs:
 
       - name: Push tags
         run: |
+          git push origin "refs/tags/build-${{ github.run_number }}"
+
+      - name: Push tags
+        run: |
           git push https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository_owner }}/${{ github.repository }} --push origin --tags
 
 
