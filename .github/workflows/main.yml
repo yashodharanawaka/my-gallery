@@ -45,15 +45,10 @@ jobs:
       - name: Get the working directory
         run: pwd
 
-#      - name: Get the latest commit hash
-#        run: |
-#          COMMIT_HASH=$(git rev-parse HEAD)
-#          echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
-#
-#      - name: Set Git user email and name
-#        run: |
-#          git config user.email "actions@github.com"
-#          git config user.name "GitHub Actions"
+      - name: Get the latest commit hash
+        run: |
+          COMMIT_HASH=$(git rev-parse HEAD)
+          echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_ENV
 
       - name: Create Release
         id: create_release
@@ -61,7 +56,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
-          tag_name: "${{ github.ref_name }}"
+          tag_name: "v${{ COMMIT_HASH }}"
           release_name: Release ${{ github.ref_name }}
           body: |
             Changes in this Release
