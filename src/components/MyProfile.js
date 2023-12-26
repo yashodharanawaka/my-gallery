@@ -9,17 +9,13 @@ const MyProfile = () => {
         <div className="contact-container">
             <div className="contact-details">
                 <h2>About Me</h2>
-                <p>Welcome to my portfolio! I'm passionate about capturing moments and telling stories through
+                <p>Welcome to my portfolio!<br/>I'm passionate about capturing moments and telling stories through
                     photography. Whether it's portraits, landscapes, or events, I strive to create visual narratives
-                    that leave a lasting impression.</p>
-
-                <h3>Expertise</h3>
-                <p>Specializing in portrait photography, event coverage, and stunning landscapes. Proficient in using
+                    that leave a lasting impression.<br/>I am a recipient of the "Photographer of the Year" award (2022)
+                    and featured in Photography Magazine's Top
+                    10 Emerging Photographers.<br/>Further,I am Specializing in portrait photography, event coverage,
+                    and stunning landscapes. Proficient in using
                     state-of-the-art equipment and innovative techniques to capture the perfect shot.</p>
-
-                <h3>Awards</h3>
-                <p>Recipient of the "Photographer of the Year" award (2022) and featured in Photography Magazine's Top
-                    10 Emerging Photographers.</p>
             </div>
 
             <div className="contact-form">
