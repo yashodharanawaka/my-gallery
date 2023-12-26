@@ -77,19 +77,3 @@ jobs:
 
       - name: Sync to S3 Bucket
         run: aws s3 sync $GITHUB_WORKSPACE/build/ s3://my-gallery-s3-bucket --delete
-
-  invalidate-cache:
-    needs: deploy
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: CloudFront Cache Invalidation
-        run: |
-          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws configure set default.region your-region
-          aws configure set default.output json
-          aws cloudfront create-invalidation --distribution-id E3QX6D3AGSRMWB --paths "/*"
-        env:
-          AWS_DEFAULT_REGION: us-east-1
-          AWS_DEFAULT_OUTPUT: json
