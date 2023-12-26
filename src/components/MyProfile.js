@@ -25,7 +25,7 @@ const MyProfile = () => {
                 <h2>Contact Me</h2>
                 <div className="contact-details">
                     <p>Email: myself@somehwere.com</p>
-                    <p>Phone: +94 00-000-0000</p>
+                    <p>Phone: +94 71-000-0000</p>
                     <p>Address: 1/44,Udara Mw., Colombo 01, Sri Lanka</p>
                     <i className="fa fa-facebook-official" aria-hidden="true"></i>
                     <div className="social-links">
