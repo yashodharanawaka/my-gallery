@@ -123,6 +123,10 @@ body {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
+.social-links a {
+    margin-right: 10px; /* Adjust the margin as needed */
+}
+
 /* Navbar styles */
 
 nav {
