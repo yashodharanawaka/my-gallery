@@ -68,7 +68,7 @@ jobs:
           name: build-artifact
           path: build
 
-      - name: Deploy to AWS S3
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
